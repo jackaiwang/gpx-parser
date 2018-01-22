@@ -508,8 +508,8 @@ public class GPXParser extends BaseGPX {
 	private Date getNodeValueAsDate(Node node) throws DOMException, ParseException {
 		Date val = null;
 		try {
-			val = xmlDateFormat.parse(node.getFirstChild().getNodeValue()
-					.replaceAll("([0-9\\-T]+:[0-9]{2}:[0-9.+]+):([0-9]{2})", "$1$2"));
+			String date = node.getFirstChild().getNodeValue().replaceAll("([\\.]+[0-9]{3}Z)", "Z");
+			val = xmlDateFormat.parse(date.replaceAll("([0-9\\-T]+:[0-9]{2}:[0-9.+]+):([0-9]{2})", "$1$2"));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
